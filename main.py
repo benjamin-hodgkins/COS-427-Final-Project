@@ -72,7 +72,7 @@ def main():
     print("Recall: %.8f" % (recall_score(test["Disease"], predicted, average='macro')))
     print("F1 Score: %.8f" % (f1_score(test["Disease"], predicted, average='macro')))
     
-    #TODO Logistic Regression Classifier
+    #Logistic Regression Classifier
     logitic_regression_clf = Pipeline([
         ('vect', CountVectorizer()),
         ('tfidf', TfidfTransformer()),
