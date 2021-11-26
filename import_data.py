@@ -16,6 +16,7 @@ def search(query, retsize):
     results = Entrez.read(handle)
     return results
 
+#Uses efetch to parse the data and extract only the abstract
 def get_abstracts(pmid_list, search_term):
     ids = ','.join(pmid_list)
     handle = Entrez.efetch(db='pubmed', id=ids, rettype="medline", retmode='text', api_key='9595a4004cd58ea5862bf26c92a65b374e08' )
@@ -33,6 +34,7 @@ def get_abstracts(pmid_list, search_term):
             pass
     return abstracts, found
 
+#Searches for 12,000 abstracts of each disease class
 def main():
     program_start = time.perf_counter()
     for x in range(4):

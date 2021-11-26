@@ -15,7 +15,7 @@ def main():
     filtered = data[(data.Disease == "Heart Disease") | (data.Disease == "Influenza")
                 | (data.Disease == "Lung Cancer") | (data.Disease == "HIV")]
     
-    #making train/validation/test sets
+    #Making train/validation/test sets
     one = filtered[filtered.Disease == "Heart Disease"].iloc[:10000]
     one_train = one[:7000]
     one_val = one[7000:8500]
