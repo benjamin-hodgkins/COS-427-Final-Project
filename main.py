@@ -5,8 +5,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import SGDClassifier, LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
-
-import numpy as np
+import time
 
 def main():
     
@@ -41,7 +40,10 @@ def main():
     test = one_test.append(two_test).append(three_test).append(four_test)
     
     #Building the classifiers
+    
     #Naives Bayes Classifier
+    program_start = time.perf_counter()
+    start = time.perf_counter()
     naive_bayes_clf = Pipeline([
         ('vect', CountVectorizer()),
         ('tfidf', TfidfTransformer()),
@@ -49,13 +51,16 @@ def main():
     ])
     naive_bayes_clf.fit(train["Abstract"], train["Disease"])
     predicted = naive_bayes_clf.predict(test["Abstract"])
+    end = time.perf_counter()
     print("Naive Bayes results:")
     print("Accuracy: %.8f" % (accuracy_score(test["Disease"], predicted)))
     print("Precision: %.8f" % (precision_score(test["Disease"], predicted, average='macro')))
     print("Recall: %.8f" % (recall_score(test["Disease"], predicted, average='macro')))
     print("F1 Score: %.8f" % (f1_score(test["Disease"], predicted, average='macro')))
+    print(f"Time: {end - start:0.2f} seconds\n")
     
     #SVM Classifier
+    start = time.perf_counter()
     svm_clf = Pipeline([
         ('vect', CountVectorizer()),
         ('tfidf', TfidfTransformer()),
@@ -66,13 +71,16 @@ def main():
     
     svm_clf.fit(train["Abstract"], train["Disease"])
     predicted = svm_clf.predict(test["Abstract"])
+    end = time.perf_counter()
     print("SVM results:")
     print("Accuracy: %.8f" % (accuracy_score(test["Disease"], predicted)))
     print("Precision: %.8f" % (precision_score(test["Disease"], predicted, average='macro')))
     print("Recall: %.8f" % (recall_score(test["Disease"], predicted, average='macro')))
     print("F1 Score: %.8f" % (f1_score(test["Disease"], predicted, average='macro')))
+    print(f"Time: {end - start:0.2f} seconds\n")
     
     #Logistic Regression Classifier
+    start = time.perf_counter()
     logitic_regression_clf = Pipeline([
         ('vect', CountVectorizer()),
         ('tfidf', TfidfTransformer()),
@@ -80,10 +88,14 @@ def main():
     ])
     logitic_regression_clf.fit(train["Abstract"], train["Disease"])
     predicted = logitic_regression_clf.predict(test["Abstract"])
+    end = time.perf_counter()
     print("Logisitic Regression results:")
     print("Accuracy: %.8f" % (accuracy_score(test["Disease"], predicted)))
     print("Precision: %.8f" % (precision_score(test["Disease"], predicted, average='macro')))
     print("Recall: %.8f" % (recall_score(test["Disease"], predicted, average='macro')))
     print("F1 Score: %.8f" % (f1_score(test["Disease"], predicted, average='macro')))
+    print(f"Time: {end - start:0.2f} seconds\n")
     
+    program_end = time.perf_counter()
+    print(f"Total time: {program_end - program_start:0.2f} seconds")
 main()
