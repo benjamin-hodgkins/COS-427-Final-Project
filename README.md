@@ -7,8 +7,8 @@ Lung Cancer and Heart Disease.
 
 Materials and Methods: 40,000 abstracts (10,000 of each class) were used for training/validation/testing,
 in a 70-15-15 split. Naive Bayes, SVM and Logistic Regression classifiers were used with a BoW representation.
-main.py contains the pre-processing/classifiers, while import_data.py was run to collect the data from PubMed.
-
+main.py contains the pre-processing/classifiers, while import_data.py was run to collect the data from PubMed
+which is stored in abstracts.txt
 
 Results: To measure success of the classifiers, accuracy, precision, recall and F1 score were all noted.
 All three classifiers had over 0.96 for each category, indicating the classifiers worked very well. 
